@@ -6,7 +6,7 @@ global height
 # length of track
 global maxheight
 
-WW, WH = 600, 250
+WW, WH = 400, 250
 
 # create window
 dpg.create_context()

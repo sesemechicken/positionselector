@@ -1,4 +1,6 @@
 # GOAL: create a gui that interfaces with a robot to move the helm up for dropping
+import sys
+
 import dearpygui.dearpygui as dpg
 
 # height for the robot to move to
@@ -46,7 +48,6 @@ def move(sender):
         except ValueError:
             print(height, "is not in bounds")
             height = 0
-            print("Resetting")
 
         # set to zero
         except:
@@ -57,20 +58,20 @@ def move(sender):
         finally:
             # code to send height to robot
             print("Moving to", height)
-            return
 
 
 # create base frame in window
 with dpg.window(tag="Primary Window"):
     # buttons of various labels that define height
-    dpg.add_radio_button(label="radio", items=radioNumbers, pos=[WW // 8, WH // 10],
+    dpg.add_radio_button(label="radio", items=radioNumbers, pos=[WW // 8, 25],
                          callback=move)
     # custom input whose value is the height
-    dpg.add_slider_int(label="", width=100, pos=[(WW // 3)+10, WH // 10], default_value=7, max_value=maxheight,
-                       min_value=0, callback=move)
+    dpg.add_slider_int(label="", width=25, height=180, pos=[(WW // 2.75) + 15, 25], vertical=True, default_value=7,
+                       max_value=maxheight, min_value=0, callback=move)
     # button to actuate robot
-    dpg.add_button(label="Move", pos=[WW // 1.25, WH // 10], width=40, callback=move)
+    dpg.add_button(label="Move", pos=[WW // 1.5, 25], width=80, height=180, callback=move)
 
+    dpg.add_radio_button()
 # necessary ignore
 dpg.setup_dearpygui()
 dpg.show_viewport()
